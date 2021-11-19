@@ -24,6 +24,8 @@ using System.IO;
 // NmapXmlParser by kamiizumi
 // Tools -> NuGet Package Manager -> Manage NuGet Package for Solution ... -> Browse -> search NmapXmlParser -> install
 
+// BlackList RPC
+
 
 namespace Final__Convert_NmapXML_To_Word_01
 {
