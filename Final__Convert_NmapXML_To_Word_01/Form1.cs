@@ -16,13 +16,15 @@ using System.IO;
 
 
 // Word interop
-// In project, right click references -> Add references -> COM -> search word -> Microsoft Word 16.0 Object Library
-// To work computer need some form of office
+// Purpose: interact with word document
+// Install: In project, right click references -> Add references -> COM -> search word -> Microsoft Word 16.0 Object Library
+// Note: To work computer need some form of office
 // in this version, work with word 2019
 
 // NmapXmlParser 
-// NmapXmlParser by kamiizumi
-// Tools -> NuGet Package Manager -> Manage NuGet Package for Solution ... -> Browse -> search NmapXmlParser -> install
+// Purpose: read nmap xml file
+// Install: Tools -> NuGet Package Manager -> Manage NuGet Package for Solution ... -> Browse -> search NmapXmlParser -> install
+// Note: NmapXmlParser by kamiizumi
 
 // BlackList RPC
 
@@ -36,9 +38,10 @@ namespace Final__Convert_NmapXML_To_Word_01
             InitializeComponent();
         }
 
-        // get file path of the xml file
+        
         private void btn_ChooseFile_Click(object sender, EventArgs e)
         {
+            // get file path of the xml file
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*";
             DialogResult result = openFileDialog.ShowDialog(); 
@@ -53,8 +56,15 @@ namespace Final__Convert_NmapXML_To_Word_01
         {
             textBox_Status.Text = "Reading XML Data";
             List<Machine> list_Machines = Convert_XML_To_List(textBox_FilePath.Text);
-            textBox_Status.Text = "Creating Word Document";
-            CreateDocument(list_Machines, textBox_FilePath.Text);
+            if(list_Machines.Count != 0)
+            {
+                textBox_Status.Text = "Creating Word Document";
+                CreateDocument(list_Machines, textBox_FilePath.Text);
+            }
+            else
+            {
+                textBox_Status.Text = "Problem with nmap file";
+            }
         }
         
         private List<Machine> Convert_XML_To_List(string inputFilePath)
